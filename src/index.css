@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties ────────────────────────────────────── */
+:root {
+  --crimson: #dc143c;
+  --rose: #f43f5e;
+  --lime: #84cc16;
+}
+
+/* ─── Base Styles ──────────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background: #fff;
+  color: #1a1a1a;
+  overflow-x: hidden;
+}
+
+/* ─── Custom Scrollbar ─────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #fdf2f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #fbcfe8;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f9a8d4;
+}
+
+/* ─── Range Slider (Budget) ────────────────────────────────────── */
+.vibe-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  outline: none;
+  border-radius: 999px;
+  height: 8px;
+  cursor: pointer;
+}
+
+.vibe-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #dc143c;
+  cursor: grab;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.vibe-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(220, 20, 60, 0.5);
+}
+
+.vibe-slider::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.2);
+}
+
+.vibe-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #dc143c;
+  cursor: grab;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+}
+
+/* ─── Animation Utilities ──────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.animate-fadeInUp { animation: fadeInUp 0.5s ease forwards; }
+.animate-fadeIn   { animation: fadeIn 0.3s ease forwards; }
+.animate-slideIn  { animation: slideInRight 0.4s ease forwards; }
+
+/* ─── Glassmorphism ────────────────────────────────────────────── */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.glass-pink {
+  background: rgba(255, 241, 245, 0.80);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(251, 207, 232, 0.6);
+}
+
+/* ─── Card Flip (3D perspective) ───────────────────────────────── */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ─── Tailwind custom components ───────────────────────────────── */
+@layer components {
+  .btn-crimson {
+    @apply px-6 py-3 bg-[#dc143c] text-white font-bold rounded-2xl shadow-lg shadow-[#dc143c]/20 hover:bg-rose-600 hover:shadow-[#dc143c]/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 text-sm;
+  }
+
+  .btn-outline {
+    @apply px-6 py-3 bg-white text-gray-700 font-bold rounded-2xl border border-pink-100 hover:border-[#dc143c]/30 hover:text-[#dc143c] transition-all duration-200 text-sm shadow-sm;
+  }
+
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-sm border border-pink-100 rounded-3xl shadow-xl;
+  }
+
+  .section-badge {
+    @apply inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest;
+  }
+}
+
+/* ─── Delay utilities for animations ──────────────────────────── */
+.delay-100  { animation-delay: 100ms; }
+.delay-200  { animation-delay: 200ms; }
+.delay-300  { animation-delay: 300ms; }
+.delay-500  { animation-delay: 500ms; }
+.delay-1000 { animation-delay: 1000ms; }
